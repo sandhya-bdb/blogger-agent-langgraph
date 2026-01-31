@@ -146,12 +146,7 @@ What You Can See in Studio
 
 - Final translated output
 
-### 📸 Add screenshots here later
 
-/screenshots/
-  ├── graph_view.png
-  ├── execution_trace.png
-  └── final_output.png
 
 ### 🚀 FastAPI Usage
 ```
@@ -216,4 +211,5 @@ GROQ_API_KEY=your_key_here
 - Unit & graph tests
 
 ☁️ Cloud deployment
+
 
