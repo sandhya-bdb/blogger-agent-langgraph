@@ -1,4 +1,4 @@
-### LangGraph Blog Generator (Multilingual)
+## LangGraph Blog Generator (Multilingual)
 
 A LangGraph-powered blog generation system that creates structured blog posts and translates them into multiple languages using a router-based graph architecture, FastAPI, and LangSmith Studio.
 
@@ -29,7 +29,7 @@ This project demonstrates real-world agent orchestration, conditional routing, a
 ### 📸 Screenshots
 
 ### 🔀 LangGraph Workflow
-## LangGraph Workflow
+
 
 ![LangGraph Flow](screenshots/flow.png)
 
@@ -245,6 +245,7 @@ GROQ_API_KEY=your_key_here
 - Streaming responses
 - Unit & graph tests
 -  Cloud deployment
+
 
 
 
