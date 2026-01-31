@@ -6,13 +6,13 @@ This project demonstrates real-world agent orchestration, conditional routing, a
 
 ### ✨ Features
 
-####📝 Automated Blog Generation
+#### 📝 Automated Blog Generation
 
 - Title creation
 
 - Structured content generation (Markdown)
 
-####🌍 Multilingual Translation
+#### 🌍 Multilingual Translation
 
 - Hindi
 
@@ -33,7 +33,7 @@ This project demonstrates real-world agent orchestration, conditional routing, a
 - Node-level inspection
 - Debug-friendly workflows
 
-####🚀 FastAPI Backend
+#### 🚀 FastAPI Backend
 
 - POST API for blog generation
 
@@ -55,7 +55,7 @@ Language Router
   ↓
 End
 ```
-####Why This Design?
+#### Why This Design?
 
 - Separation of concerns
 
@@ -189,7 +189,7 @@ Create a .env file (never commit this):
 LANGCHAIN_API_KEY=your_key_here
 GROQ_API_KEY=your_key_here
 ```
-###🛠️ Tech Stack
+### 🛠️ Tech Stack
 
 - Python 3.13
 
@@ -207,13 +207,13 @@ GROQ_API_KEY=your_key_here
 
 - Uvicorn
 
-####🌱 Future Enhancements
+#### 🌱 Future Enhancements
 
-- 🔁 Dynamic language registration
-- 🧠 Auto language detection
-- 🌐 Frontend UI
--📡 Streaming responses
-
-🧪 Unit & graph tests
+- Dynamic language registration
+-  Auto language detection
+-  Frontend UI
+- Streaming responses
+- Unit & graph tests
 
 ☁️ Cloud deployment
+
