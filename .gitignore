@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# LangGraph / LangSmith
+.langgraph_api/
+.langsmith/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
