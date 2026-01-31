@@ -209,7 +209,7 @@ GROQ_API_KEY=your_key_here
 -  Frontend UI
 - Streaming responses
 - Unit & graph tests
+-  Cloud deployment
 
-☁️ Cloud deployment
 
 
