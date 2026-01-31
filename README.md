@@ -55,6 +55,21 @@ Language Router
   ↓
 End
 ```
+
+flowchart TD
+
+    A[Start] --> B[Title Creation]
+    B --> C[Content Generation]
+    C --> D{Language Router}
+
+    D -->|Hindi| E[Hindi Translation]
+    D -->|French| F[French Translation]
+    D -->|Assamese| G[Assamese Translation]
+
+    E --> H[End]
+    F --> H
+    G --> H
+
 #### Why This Design?
 
 - Separation of concerns
@@ -210,6 +225,7 @@ GROQ_API_KEY=your_key_here
 - Streaming responses
 - Unit & graph tests
 -  Cloud deployment
+
 
 
 
