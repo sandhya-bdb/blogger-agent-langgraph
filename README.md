@@ -26,25 +26,12 @@ This project demonstrates real-world agent orchestration, conditional routing, a
 - Dynamic routing based on current_language
 
 - Clean separation of generation vs translation
-### 📸 Screenshots
+
 
 ### 🔀 LangGraph Workflow
 
 
 ![LangGraph Flow](screenshots/flow.png)
-
-## LangGraph Studio – Hindi
-
-![Hindi Studio](screenshots/langgraph_studio_hindi.png)
-
-## LangGraph Studio – Assamese
-
-![Assamese Studio](screenshots/langgraph_studio_assamese.png)
-
-## API Test (Postman)
-
-![Postman](screenshots/postman_french.png)
-
 
 
 #### 🧪 LangGraph Studio Integration
@@ -245,6 +232,7 @@ GROQ_API_KEY=your_key_here
 - Streaming responses
 - Unit & graph tests
 -  Cloud deployment
+
 
 
 
