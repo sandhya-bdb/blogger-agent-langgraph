@@ -1,197 +1,204 @@
-## LangGraph Blog Generator (Multilingual)
+<div align="center">
 
-A LangGraph-powered blog generation system that creates structured blog posts and translates them into multiple languages using a router-based graph architecture, FastAPI, and LangSmith Studio.
+# Blogger Agent (LangGraph)
 
-This project demonstrates real-world agent orchestration, conditional routing, and production-style API integration.
+### Your Multilingual AI Blog Generation Assistant
 
-### ✨ Features
+![Python](https://img.shields.io/badge/Python-3.13+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![LangGraph](https://img.shields.io/badge/LangGraph-Router_Workflow-0EA5E9?style=for-the-badge)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-10B981?style=for-the-badge)
+![Groq](https://img.shields.io/badge/Groq-LLM_Powered-F59E0B?style=for-the-badge)
+![LangSmith Studio](https://img.shields.io/badge/LangSmith-Studio_Debugging-8B5CF6?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-84CC16?style=for-the-badge)
 
-#### 📝 Automated Blog Generation
+*Generate blog titles and content, then route to language-specific translation nodes with LangGraph.*
 
-- Title creation
+[Overview](#overview) • [Architecture](#architecture) • [Installation](#installation) • [API Usage](#api-usage) • [Project Structure](#project-structure)
 
-- Structured content generation (Markdown)
+</div>
 
-#### 🌍 Multilingual Translation
+---
 
-- Hindi
+## Overview
 
-- French
+**Blogger Agent** is a router-based LangGraph application that creates a complete blog post from a topic and optionally translates it into supported languages.
 
-- Assamese
-(easily extensible)
+| Blog Generation | Router Logic | Translation Nodes | API Integration |
+|---|---|---|---|
+| Title + markdown content generation | Conditional language routing | Hindi, French, Assamese | FastAPI `POST /blogs` |
 
-#### 🧭 Router-Based LangGraph Architecture
+---
 
-- Dynamic routing based on current_language
+## What Makes It Useful?
 
-- Clean separation of generation vs translation
-
-
-### 🔀 LangGraph Workflow
-
-
-![LangGraph Flow](screenshots/flow.png)
-
-
-#### 🧪 LangGraph Studio Integration
-
-- Visual graph execution
-- Node-level inspection
-- Debug-friendly workflows
-
-#### 🚀 FastAPI Backend
-
-- POST API for blog generation
-
-- Works with Postman / frontend clients
-
-### 🏗️ Architecture Overview
-High-Level Flow
-```
-Start
-  ↓
-Title Creation
-  ↓
-Content Generation
-  ↓
-Language Router
-  ├── Hindi Translation
-  ├── French Translation
-  ├── Assamese Translation
-  ↓
-End
+```text
+Topic Input -> Title Creation -> Content Generation -> Language Router -> Translated Blog Output
 ```
 
-flowchart TD
+### Supported Language Paths
 
-    A[Start] --> B[Title Creation]
-    B --> C[Content Generation]
-    C --> D{Language Router}
+| Input `current_language` | Routed Node |
+|---|---|
+| `hindi` | `hindi_translation` |
+| `french` | `french_translation` |
+| `assamese` | `assamese_translation` |
 
-    D -->|Hindi| E[Hindi Translation]
-    D -->|French| F[French Translation]
-    D -->|Assamese| G[Assamese Translation]
+---
 
-    E --> H[End]
-    F --> H
-    G --> H
+## Installation
 
-#### Why This Design?
+### Prerequisites
 
-- Separation of concerns
+| Required | Optional |
+|---|---|
+| Python 3.13+ | LangSmith account |
+| `uv` or `pip` | Postman |
+| Groq API key | LangGraph Studio |
 
-- Writing ≠ Translation
+### Local Setup
 
-- Scalable routing
+<details>
+<summary><b>Step 1: Clone Repository</b></summary>
 
-- Each language is an independent node
-
-- Production-friendly
-
-- Same graph works via API and Studio
-
-### 🧩 Project Structure
-```
-blogger-agent/
-│
-├── src/
-│   ├── graphs/
-│   │   └── graph_builder.py      # LangGraph construction & routing
-│   │
-│   ├── nodes/
-│   │   └── blog_node.py          # Title, content, translation logic
-│   │
-│   ├── states/
-│   │   └── blogstate.py          # Typed blog state schema
-│   │
-│   └── llms/
-│       └── groqllm.py            # LLM wrapper (Groq)
-│
-├── app.py                        # FastAPI entry point
-├── langgraph.json                # LangGraph Studio config
-├── request.json                  # Sample Studio input
-├── requirements.txt
-├── README.md
-└── .env (ignored)
-```
-### LangGraph Design
-Nodes
-
-- title_creation
-
-- content_generation
-
-- hindi_translation
-
-- french_translation
-
-- assamese_translation
-
-#### Router Logic
-
-Routing is decided based on:
-```
-state["current_language"]
+```bash
+git clone https://github.com/sandhya-bdb/blogger-agent-langgraph.git
+cd blogger-agent-langgraph
 ```
 
-Example:
+</details>
 
-- "hindi" → hindi_translation
+<details>
+<summary><b>Step 2: Install Dependencies</b></summary>
 
-- "french" → french_translation
+Using `uv`:
 
-- "assamese" → assamese_translation
-
-### 🧪 LangGraph Studio (Visual Debugging)
-
-Start Studio:
-```
-langgraph dev
+```bash
+uv sync
 ```
 
-Then open the Studio URL shown in terminal.
+Or using `pip`:
 
-Example Studio Input
-{
-  "topic": "Ethical AI",
-  "current_language": "french"
-}
-
-What You Can See in Studio
-
-- Node-by-node execution
-
-- Intermediate blog state
-
-- Router decisions
-
-- Final translated output
-
-
-
-### 🚀 FastAPI Usage
+```bash
+pip install -r requirements.txt
 ```
-Start the API
+
+</details>
+
+<details>
+<summary><b>Step 3: Configure Environment</b></summary>
+
+Create a `.env` file in the root:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+LANGCHAIN_API_KEY=your_langsmith_api_key
+```
+
+</details>
+
+<details>
+<summary><b>Step 4: Run API Server</b></summary>
+
+```bash
 python app.py
 ```
 
-Server runs at:
+Server starts at `http://localhost:8000`
+
+</details>
+
+---
+
+## Architecture
+
+### System Architecture & Flow
+
+![LangGraph Workflow](screenshots/flow.png)
+
+### Graph Components
+
+| Layer | Components |
+|---|---|
+| Generation | `title_creation`, `content_generation` |
+| Routing | `route` + `route_decision` based on `current_language` |
+| Translation | `hindi_translation`, `french_translation`, `assamese_translation` |
+| Serving | FastAPI app in `app.py` |
+| LLM | Groq `llama-3.1-8b-instant` |
+
+### High-Level Graph
+
+```mermaid
+flowchart TD
+    A["Start"] --> B["Title Creation"]
+    B --> C["Content Generation"]
+    C --> D{"Language Router"}
+
+    D -->|Hindi| E["Hindi Translation"]
+    D -->|French| F["French Translation"]
+    D -->|Assamese| G["Assamese Translation"]
+
+    E --> H["End"]
+    F --> H
+    G --> H
 ```
-http://localhost:8000
+
+---
+
+## Features
+
+| Core Capability | Details |
+|---|---|
+| Automated Blog Generation | Topic -> SEO-style title -> structured markdown content |
+| Multilingual Output | Routes to language-specific translation node |
+| Graph-Native Orchestration | Clear node boundaries and conditional edges |
+| API-First Design | Exposed as FastAPI endpoint |
+| Studio Debugging | Compatible with LangGraph Studio for visual inspection |
+
+---
+
+## Tech Stack
+
+| AI & Workflow | Backend & Runtime |
+|---|---|
+| LangGraph | FastAPI |
+| LangChain | Uvicorn |
+| LangChain Groq | Python 3.13+ |
+| LangGraph CLI | Pydantic |
+
+---
+
+## API Usage
+
+### Endpoint
+
+| Method | Route | Description |
+|---|---|---|
+| `POST` | `/blogs` | Generate and optionally translate a blog |
+
+### Sample Request
+
+```bash
+curl -X POST http://localhost:8000/blogs \
+  -H "Content-Type: application/json" \
+  -d '{"topic":"Ethical AI","current_language":"french"}'
 ```
-POST /blogs
-Request (Postman / curl)
-```
+
+### Sample JSON Body
+
+```json
 {
   "topic": "Ethical AI",
   "current_language": "hindi"
 }
 ```
-Response
-```
+
+### Sample Response Shape
+
+```json
 {
   "data": {
+    "topic": "Ethical AI",
+    "current_language": "hindi",
     "blog": {
       "title": "...",
       "content": "..."
@@ -199,44 +206,72 @@ Response
   }
 }
 ```
-#### 🔐 Environment Variables
 
-Create a .env file (never commit this):
+---
+
+## LangGraph Studio
+
+Run Studio locally:
+
+```bash
+langgraph dev
 ```
-LANGCHAIN_API_KEY=your_key_here
-GROQ_API_KEY=your_key_here
+
+Use `request.json` as a quick input payload.
+
+---
+
+## Project Structure
+
+```text
+.
+├── app.py                          # FastAPI server entrypoint
+├── langgraph.json                  # Studio config
+├── request.json                    # Sample request payload
+├── src/
+│   ├── graphs/
+│   │   └── graph_builder.py        # Graph construction and routing
+│   ├── nodes/
+│   │   └── blog_node.py            # Blog + translation node logic
+│   ├── states/
+│   │   └── blogstate.py            # State schema
+│   └── llms/
+│       └── groqllm.py              # Groq LLM wrapper
+├── screenshots/
+│   ├── flow.png
+│   ├── langgraph_studio_assamese.png
+│   ├── langgraph_studio_hindi.png
+│   └── postman_french.png
+├── pyproject.toml
+├── requirements.txt
+└── README.md
 ```
-### 🛠️ Tech Stack
 
-- Python 3.13
+---
 
-- LangGraph
+## Screenshots
 
-- LangChain
+| Graph Flow | Studio (Hindi) |
+|---|---|
+| ![Flow](screenshots/flow.png) | ![Studio Hindi](screenshots/langgraph_studio_hindi.png) |
 
-- LangSmith Studio
+| Studio (Assamese) | Postman (French) |
+|---|---|
+| ![Studio Assamese](screenshots/langgraph_studio_assamese.png) | ![Postman French](screenshots/postman_french.png) |
 
-- FastAPI
+---
 
-- Groq LLM
+## Future Improvements
 
-- Pydantic
+- Add dynamic language registration.
+- Add automatic language detection from user input.
+- Add streaming responses for long content generation.
+- Add unit tests and graph-level integration tests.
+- Add deployment setup for cloud environments.
 
-- Uvicorn
+---
 
-#### 🌱 Future Enhancements
+## Author
 
-- Dynamic language registration
--  Auto language detection
--  Frontend UI
-- Streaming responses
-- Unit & graph tests
--  Cloud deployment
-
-
-
-
-
-
-
-
+**Sandhya Banti Dutta Borah**  
+LangGraph-based multilingual blog generation project for practical agent orchestration and API deployment.
